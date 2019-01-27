@@ -32,7 +32,7 @@ class Gitlab {
         return $this->get('/user');
     }
     function cex() {
-        $secret = base64_encode(random_bytes(32));
+        $secret = str_replace('/', '', base64_encode(random_bytes(32)));
         $me = $this->me(); // Who I am?
         shell_exec("drush config:export --destination /tmp/$secret");
         $settings = file_get_contents("/tmp/$secret/settings.php");
